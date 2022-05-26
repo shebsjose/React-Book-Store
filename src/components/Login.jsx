@@ -7,7 +7,6 @@ const LoginForm = () => {
   };
 
   const [inputValues, setInputValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
 
   const handleChange = (e) =>{
       setInputValues({...inputValues,[e.target.name]: e.target.value})

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import Favorites from "./Favorites";
+import ToggleButton from "./ToggleButton";
 
 const Books = () => {
   const [showTable, setShowTable] = useState([]);
@@ -19,6 +20,7 @@ const Books = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <ToggleButton/>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
