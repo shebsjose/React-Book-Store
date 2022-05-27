@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+.toggle-checkbox:checked {
+  right: 0;
+  border-color: orange;
+}
+.toggle-checkbox:checked + .toggle-label {
+  background-color: orange;
+}

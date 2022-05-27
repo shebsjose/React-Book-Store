@@ -1,22 +1,42 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { addFav } from "../redux/features/bookSlices";
+import { addFav, removeFav } from "../redux/features/bookSlices";
+import { useNavigate } from "react-router-dom";
+
 
 const Favorites = ({item }) => {
   const dispatch = useDispatch();
-  const addFavList = () => {
+  const navigate = useNavigate();
+  
+  const addFavOne = () => {
     dispatch(addFav({...item, isFav:true}));
+    navigate("/favorites");
   };
+
+  const removeFavOne = () => {
+    dispatch(removeFav({...item}));
+  };
+  
 
   return (
     <>
-           <FontAwesomeIcon
+    {
+     item.isFav ?
+     <FontAwesomeIcon
+     icon={faStar}
+     onClick={removeFavOne}
+     style ={{ color : 'orange'}}
+   />
+:
+       <FontAwesomeIcon
            icon={faStar}
-           onClick={() => addFavList()}
+           onClick={addFavOne}
+           style ={{ color : 'grey'}}
          />
+    }
+
    
-       
     </>
   );
 };
