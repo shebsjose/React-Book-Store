@@ -46,7 +46,7 @@ const Details = () => {
     navigate("/books");
   };
   return (
-    <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm">
+    <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm  dark:bg-slate-800 dark:text-gray-400">
       <div className="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20">
         <div className="flex justify-center md:justify-end -mt-16">
           <img

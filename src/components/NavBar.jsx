@@ -2,16 +2,16 @@
 import ToggleButton from "./ToggleButton";
 import { useNavigate } from "react-router-dom";
 
-const NavBar = ({ handleToggle, theme}) => {
+const NavBar = ({ handleToggle }) => {
   const navigate = useNavigate();
-console.log(theme)
-  const handleLogout = () => {
+
+  const handleLogout = ({ theme }) => {
     localStorage.clear();
     navigate("/");
   };
-
+  
   return (
-    <nav className={`w-full ${theme === "dark" ? 'dark:bg-slate-800' : "bg-white"} py-6 w-screen`}>
+    <nav className="w-full dark:bg-slate-800 py-6 bg-white w-screen dark:bg-slate-800 dark:text-gray-400">
       <div className="flex items-center justify-between mx-auto xl:max-w-7xl lg:max-w-5xl md:max-w-3xl md:px-2 px-4">
         <section className="flex items-center text-orange-700 space-x-2">
           <label className="font-bold text-xl focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none rounded-lg">
@@ -30,7 +30,7 @@ console.log(theme)
               <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
             </li>
             <li className="relative group">
-              <ToggleButton handleToggle={handleToggle} />
+              <ToggleButton />
               <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
             </li>
           </ul>

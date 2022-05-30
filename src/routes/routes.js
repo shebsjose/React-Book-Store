@@ -30,28 +30,16 @@ const Routers = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
-
-  const handleToggle = () => {
-    localStorage.removeItem("theme");
-    if (theme === "light") {
-      setTheme("dark");
-      document.body.style.backgroundColor = "grey";
-    } else {
-      setTheme("light");
-      document.body.style.backgroundColor = "white";
-    }
-  };
   
     return (
       <div>
         <Router>
-          <NavBar handleToggle={handleToggle} theme={theme}/>
+          <NavBar/>
           <Routes>
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/users" element={<Users theme={theme} />} />
             <Route path="/login" element={<Login theme={theme}/>} />
-            <Route path="/books" element={<Books theme={theme} />} />
+            <Route path="/books" element={<Books  />} />
             <Route path="/favorites" element={<FavoriteList theme={theme}/>} />
             <Route path="/details/:id" element={<Details theme={theme} />} />
             <Route path="notfound" element={<NotFound/>} />   

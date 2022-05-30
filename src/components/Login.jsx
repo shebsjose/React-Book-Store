@@ -112,7 +112,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm">
+    <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm dark:bg-slate-800 dark:text-gray-400">
       <h2 className="text-4xl px-4 ">Log In</h2>
       <form className="mt-10 space-y-8" onSubmit={handleSubmit}>
         <input
@@ -148,7 +148,7 @@ const LoginForm = () => {
               stroke="#949090"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeidth="1"
+              strokeWidth="1"
             />
           </svg>
         </div>
