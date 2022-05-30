@@ -4,41 +4,36 @@ import { useDispatch } from "react-redux";
 import { addFav, removeFav } from "../redux/features/bookSlices";
 import { useNavigate } from "react-router-dom";
 
-
-const Favorites = ({item }) => {
+const FavoriteIcon = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const addFavOne = () => {
-    dispatch(addFav({...item, isFav:true}));
+    dispatch(addFav({ ...item, isFav: true }));
     navigate("/favorites");
   };
 
   const removeFavOne = () => {
-    dispatch(removeFav({...item}));
+    dispatch(removeFav({ ...item }));
   };
-  
 
   return (
     <>
-    {
-     item.isFav ?
-     <FontAwesomeIcon
-     icon={faStar}
-     onClick={removeFavOne}
-     style ={{ color : 'orange'}}
-   />
-:
-       <FontAwesomeIcon
-           icon={faStar}
-           onClick={addFavOne}
-           style ={{ color : 'grey'}}
-         />
-    }
-
-   
+      {item.isFav ? (
+        <FontAwesomeIcon
+          icon={faStar}
+          onClick={removeFavOne}
+          style={{ color: "orange" }}
+        />
+      ) : (
+        <FontAwesomeIcon
+          icon={faStar}
+          onClick={addFavOne}
+          style={{ color: "grey" }}
+        />
+      )}
     </>
   );
 };
 
-export default Favorites;
+export default FavoriteIcon;

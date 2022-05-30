@@ -1,9 +1,16 @@
-import {  Link } from "react-router-dom";
+
 import ToggleButton from "./ToggleButton";
+import { useNavigate } from "react-router-dom";
 
 
 const NavBar = () => {
 
+  const navigate = useNavigate();
+  
+ const handleLogout = ()=>{
+   localStorage.clear();
+   navigate('/login')
+ }
   return (
     <nav className="w-full py-6 bg-white w-screen">
       <div className="flex items-center justify-between mx-auto xl:max-w-7xl lg:max-w-5xl md:max-w-3xl md:px-2 px-4">
@@ -16,12 +23,9 @@ const NavBar = () => {
         <ToggleButton />
             <ul className="md:space-x-8 space-x-6 text-gray-900 font-semibold hidden md:flex">
               <li className="relative group">
-                <Link
-                  className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none"
-                  to="/home"
-                >
-                  <span className="px-1.5"> LogOut</span>
-                </Link>
+                
+                  <span className="px-1.5" onClick={handleLogout}> LogOut</span>
+
                 <div className="w-full  bg-transparent group-hover:bg-orange-500 transition-al absolute bottom-0" />
               </li>
             </ul>

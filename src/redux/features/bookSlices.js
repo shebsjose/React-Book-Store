@@ -16,22 +16,25 @@ export const bookSlice = createSlice({
       const updateList = state.books.map((list) =>
       list.id === action.payload.id ? updated : list
       );
-     state.books = updateList
-
+     state.books = updateList;
     },
 
     addFav: (state, action) => {
      state.favBooks.push(action.payload);
+     const updateList = state.books.map((list) =>
+     list.id === action.payload.id ? action.payload : list
+     );
+     state.books = updateList;
     },
 
     removeFav: (state, action) => {
-      const changeFav = state.find((list) => list.id === action.payload);
+      const changeFav = state.books.find((list) => list.id === action.payload.id);
       const updated = { ...changeFav, isFav: false };
-      state = state.map((list) =>
-        list.id === action.payload ? updated : list
+      state.books = state.books.map((list) =>
+        list.id === action.payload.id ? updated : list
       );
-      state.bestOfBest = state.bestOfBest.filter(
-        (li) => li.id !== action.payload
+      state.favBooks = state.favBooks.filter(
+        (li) => li.id !== action.payload.id
       );
     },
 

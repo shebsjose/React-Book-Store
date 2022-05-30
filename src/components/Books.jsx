@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import Favorites from "./Favorites";
+import FavoriteIcon from "./FavoritesIcon";
 
 
 const Books = () => {
@@ -58,7 +58,7 @@ const Books = () => {
                     </Link>
                   </td>
                   <td className="px-6 py-4">
-                    <Favorites item={item} />
+                    <FavoriteIcon item={item} />
                   </td>
                 </tr>
               );

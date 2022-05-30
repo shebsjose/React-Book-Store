@@ -15,6 +15,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { setBooks } from "../redux/features/bookSlices";
 import { useDispatch } from "react-redux";
+import Users from "../components/User";
 
 const Routers = () => {
   
@@ -37,6 +38,7 @@ const Routers = () => {
             <Route path="/books" element={<Books/>} />
             <Route path="/favorites" element={<FavoriteList/>} />
             <Route path="/details/:id" element={<Details />} />
+            <Route path="/users" element={<Users/>} />
             <Route path="notfound" element={<NotFound/>} />
           </Routes>
         </Router>

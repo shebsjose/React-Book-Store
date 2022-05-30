@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {  useDispatch } from "react-redux";
+import { addUser, userAdmin } from "../redux/features/userSlices";
 
 const LoginForm = () => {
   const initialValues = {
@@ -9,8 +11,10 @@ const LoginForm = () => {
 
   const [inputValues, setInputValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
+  const [admin, setAdmin] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) =>{
       setInputValues({...inputValues,[e.target.name]: e.target.value})
@@ -19,6 +23,14 @@ const LoginForm = () => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     if (validate()){
+      if(admin){
+        dispatch(userAdmin(inputValues))
+      }
+      else{
+        dispatch(addUser(inputValues))
+      }
+      localStorage.setItem("loginUser",JSON.stringify({...inputValues, admin}));
+      setInputValues({});
       navigate("/books"); 
   }
   }
@@ -84,6 +96,17 @@ const LoginForm = () => {
         document.cookie =
           "myPassword=" + inputValues.password + "; path=http://localhost:3000";
       };
+
+    const handleAdmin = (e) =>{
+        const admin = e.target.checked;
+        if(admin){
+          setAdmin(true);
+        }
+        else{
+          setAdmin(false);
+        }
+        console.log(admin);
+    }
     
 
   return ( 
@@ -131,26 +154,29 @@ const LoginForm = () => {
         </div>
         {errors.password && (
           <div className="text-red-600 mb-5">{errors.password}</div>
-        )}
-        <div>
-          
-          <div className="flex flex-col md:flex-row justify-between ">
+        )}      
+
+        <input
+            type="checkbox"
+            name="admin"
+            id="admin"
+            onClick={handleAdmin}
+            /> Admin    
           <input
-            style={{ marginRight: "3px" }}
             type="checkbox"
             name="remember me"
             id="myCheck"
             onClick={() => {
               remember();
             }}
-          /> Remember me 
+            /> Remember me
+            <div className="flex flex-col md:flex-row justify-between ">
             <input
               className="mr-px bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase"
               type="submit"
               value="Login now"
-            />
-          </div>
-        </div>
+              />
+              </div>
       </form>
 </div>
   )}
