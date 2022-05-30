@@ -7,7 +7,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     addUser: (state, action) => {
-        state.users = [...state.users,{...action.payload,  isAdmin: false }];
+      state.users = [...state.users, { ...action.payload, isAdmin: false }];
     },
 
     removeUser: (state, action) => {
@@ -15,7 +15,7 @@ export const userSlice = createSlice({
     },
 
     userAdmin: (state, action) => {
-      state.users = [...state.users,{...action.payload, isAdmin: true }];
+      state.users = [...state.users, { ...action.payload, isAdmin: true }];
     },
   },
 });

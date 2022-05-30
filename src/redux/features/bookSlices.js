@@ -7,28 +7,33 @@ export const bookSlice = createSlice({
     favBooks: [],
   },
   reducers: {
-    setBooks: (state, action) =>{
+    setBooks: (state, action) => {
       state.books = action.payload;
     },
 
-    updateBook:(state,action) => {
-      const updated = {...action.payload, address: { city : action.payload.city}}
+    updateBook: (state, action) => {
+      const updated = {
+        ...action.payload,
+        address: { city: action.payload.city },
+      };
       const updateList = state.books.map((list) =>
-      list.id === action.payload.id ? updated : list
+        list.id === action.payload.id ? updated : list
       );
-     state.books = updateList;
+      state.books = updateList;
     },
 
     addFav: (state, action) => {
-     state.favBooks.push(action.payload);
-     const updateList = state.books.map((list) =>
-     list.id === action.payload.id ? action.payload : list
-     );
-     state.books = updateList;
+      state.favBooks.push(action.payload);
+      const updateList = state.books.map((list) =>
+        list.id === action.payload.id ? action.payload : list
+      );
+      state.books = updateList;
     },
 
     removeFav: (state, action) => {
-      const changeFav = state.books.find((list) => list.id === action.payload.id);
+      const changeFav = state.books.find(
+        (list) => list.id === action.payload.id
+      );
       const updated = { ...changeFav, isFav: false };
       state.books = state.books.map((list) =>
         list.id === action.payload.id ? updated : list
@@ -37,8 +42,6 @@ export const bookSlice = createSlice({
         (li) => li.id !== action.payload.id
       );
     },
-
-
   },
 });
 

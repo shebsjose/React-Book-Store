@@ -1,8 +1,6 @@
-
 import { useSelector } from "react-redux";
 
 const FavoriteList = () => {
-
   const books = useSelector((state) => state.book.favBooks);
 
   return (
@@ -35,7 +33,7 @@ const FavoriteList = () => {
                   <td className="px-6 py-4">{item.name}</td>
                   <td className="px-6 py-4">{item.username}</td>
                   <td className="px-6 py-4">{item.email}</td>
-                  <td className="px-6 py-4">{item.address.city}</td> 
+                  <td className="px-6 py-4">{item.address.city}</td>
                 </tr>
               );
             })}

@@ -12,7 +12,6 @@ const Books = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
- 
       <table className="w-full dark:bg-slate-800  text-sm text-left text-gray-600 dark:text-gray-400">
         <thead className="text-xs text-orange-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>

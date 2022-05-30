@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateBook } from "../redux/features/bookSlices";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +23,7 @@ const Details = () => {
     axios("https://jsonplaceholder.typicode.com/users/" + id)
       .then(({ data }) =>
         setDetails({
-          id:data.id,
+          id: data.id,
           name: data.name,
           email: data.email,
           city: data?.address?.city,
@@ -41,10 +41,10 @@ const Details = () => {
     setView(false);
   };
 
-  const handleSubmit = () =>{
+  const handleSubmit = () => {
     dispatch(updateBook(details));
     navigate("/books");
-  }
+  };
   return (
     <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm">
       <div className="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20">
@@ -55,7 +55,9 @@ const Details = () => {
           />
         </div>
         <div>
-          <h2 className="text-orange-800 text-3xl font-semibold">Details Page</h2>
+          <h2 className="text-orange-800 text-3xl font-semibold">
+            Details Page
+          </h2>
           <input
             className="mt-2 text-orange-600 text-xl font-medium text-color-500"
             value={details?.name}
@@ -81,16 +83,16 @@ const Details = () => {
         <br></br>
         {view ? (
           <button
-          className="text-white bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-500 focus:outline-none dark:focus:ring-orange-600"
-          type="button"
-          onClick={handleClick}
+            className="text-white bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-500 focus:outline-none dark:focus:ring-orange-600"
+            type="button"
+            onClick={handleClick}
           >
             Edit
           </button>
         ) : (
           <button
             className="text-white bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-500 focus:outline-none dark:focus:ring-orange-600"
-            type="button" 
+            type="button"
             onClick={handleSubmit}
           >
             Submit
