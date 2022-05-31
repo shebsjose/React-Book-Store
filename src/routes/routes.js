@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { setBooks } from "../redux/features/bookSlices";
 import { useDispatch } from "react-redux";
 import Users from "../components/User";
+import Card from "../components/cards";
 
 const Routers = () => {
   
@@ -37,11 +38,12 @@ const Routers = () => {
           <NavBar/>
           <Routes>
             <Route path="/" element={<Navigate replace to="/login" />} />
-            <Route path="/users" element={<Users theme={theme} />} />
-            <Route path="/login" element={<Login theme={theme}/>} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/books" element={<Books  />} />
-            <Route path="/favorites" element={<FavoriteList theme={theme}/>} />
-            <Route path="/details/:id" element={<Details theme={theme} />} />
+            <Route path="/favorites" element={<FavoriteList />} />
+            <Route path="/details/:id" element={<Details />} />
+            <Route path="/card" element={<Card />} />
             <Route path="notfound" element={<NotFound/>} />   
           </Routes>
         </Router>

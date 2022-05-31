@@ -10,7 +10,6 @@ const FavoriteIcon = ({ item }) => {
 
   const addFavOne = () => {
     dispatch(addFav({ ...item, isFav: true }));
-    navigate("/favorites");
   };
 
   const removeFavOne = () => {

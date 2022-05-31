@@ -14,7 +14,6 @@ export const bookSlice = createSlice({
     updateBook: (state, action) => {
       const updated = {
         ...action.payload,
-        address: { city: action.payload.city },
       };
       const updateList = state.books.map((list) =>
         list.id === action.payload.id ? updated : list
@@ -23,7 +22,10 @@ export const bookSlice = createSlice({
     },
 
     addFav: (state, action) => {
-      state.favBooks.push(action.payload);
+      // state.favBooks.push(action.payload);
+      const arr = [...state.favBooks];
+      arr.push(action.payload);
+      state.favBooks = [...new Set(arr)];
       const updateList = state.books.map((list) =>
         list.id === action.payload.id ? action.payload : list
       );

@@ -61,12 +61,12 @@ const LoginForm = () => {
     } else {
       if (input.password.length <= 6) {
         isValid = false;
-        errors.password = "Please enter length password.";
+        errors.password = "Please enter six length password.";
       }
 
-      setErrors(errors);
-      return isValid;
     }
+    setErrors(errors);
+    return isValid;
   };
 
   useEffect(() => {

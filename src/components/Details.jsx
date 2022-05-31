@@ -4,17 +4,23 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateBook } from "../redux/features/bookSlices";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Details = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+
+   const  result = location.state;
+   console.log(result);
 
   const [details, setDetails] = useState({
     name: "",
     email: "",
-    city: "",
+    username : "",
+    phone: "",
   });
   const [view, setView] = useState(true);
   const [edit, setEdit] = useState(null);
@@ -26,7 +32,8 @@ const Details = () => {
           id: data.id,
           name: data.name,
           email: data.email,
-          city: data?.address?.city,
+          username : data.username,
+          phone: data?.phone
         })
       )
       .catch((error) => console.log(error));
@@ -72,9 +79,16 @@ const Details = () => {
             onChange={handleChange}
             disabled={view}
           />
+           <input
+            className="mt-2 text-gray-600"
+            value={details?.username}
+            name="email"
+            onChange={handleChange}
+            disabled={view}
+          />
           <input
             className="mt-2 text-gray-600"
-            value={details?.city}
+            value={details?.phone}
             name="address"
             onChange={handleChange}
             disabled={view}
