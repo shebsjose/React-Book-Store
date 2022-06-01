@@ -1,51 +1,40 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateBook } from "../redux/features/bookSlices";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Details = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const result = location.state;
 
-
-   const  result = location.state;
-   console.log(result);
+  const { id } = useParams();
+  const books = useSelector((state) => state.book.books);
+  const userDetails = books && books.filter((d) => d.id === Number(id))[0];
 
   const [details, setDetails] = useState({
     name: "",
+    username: "",
     email: "",
-    username : "",
     phone: "",
   });
-  const [view, setView] = useState(true);
-  const [edit, setEdit] = useState(null);
 
   useEffect(() => {
-    axios("https://jsonplaceholder.typicode.com/users/" + id)
-      .then(({ data }) =>
-        setDetails({
-          id: data.id,
-          name: data.name,
-          email: data.email,
-          username : data.username,
-          phone: data?.phone
-        })
-      )
-      .catch((error) => console.log(error));
-  }, [id]);
+    setDetails({
+      id: userDetails.id,
+      name: userDetails.name,
+      username: userDetails.username,
+      email: userDetails.email,
+      phone: userDetails.phone,
+    });
+  }, []);
 
   const handleChange = (e) => {
     setDetails({ ...details, [e.target.name]: e.target.value });
-  };
-
-  const handleClick = () => {
-    setEdit(true);
-    setView(false);
   };
 
   const handleSubmit = () => {
@@ -70,40 +59,32 @@ const Details = () => {
             value={details?.name}
             name="name"
             onChange={handleChange}
-            disabled={view}
+            disabled={result === "view"}
+          />
+          <input
+            className="mt-2 text-gray-600"
+            value={details?.username}
+            name="username"
+            onChange={handleChange}
+            disabled={result === "view"}
           />
           <input
             className="mt-2 text-gray-600"
             value={details?.email}
             name="email"
             onChange={handleChange}
-            disabled={view}
-          />
-           <input
-            className="mt-2 text-gray-600"
-            value={details?.username}
-            name="email"
-            onChange={handleChange}
-            disabled={view}
+            disabled={result === "view"}
           />
           <input
             className="mt-2 text-gray-600"
             value={details?.phone}
-            name="address"
+            name="phone"
             onChange={handleChange}
-            disabled={view}
+            disabled={result === "view"}
           />
         </div>
         <br></br>
-        {view ? (
-          <button
-            className="text-white bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-500 focus:outline-none dark:focus:ring-orange-600"
-            type="button"
-            onClick={handleClick}
-          >
-            Edit
-          </button>
-        ) : (
+        {result === "edit" && (
           <button
             className="text-white bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-500 focus:outline-none dark:focus:ring-orange-600"
             type="button"

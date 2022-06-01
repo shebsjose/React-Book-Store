@@ -63,7 +63,6 @@ const LoginForm = () => {
         isValid = false;
         errors.password = "Please enter six length password.";
       }
-
     }
     setErrors(errors);
     return isValid;

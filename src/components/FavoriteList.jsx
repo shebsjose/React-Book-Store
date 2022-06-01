@@ -4,7 +4,7 @@ const FavoriteList = () => {
   const books = useSelector((state) => state.book.favBooks);
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg dark:bg-gray-800 dark:border-gray-700" >
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg dark:bg-gray-800 dark:border-gray-700">
       <table className="w-full dark:bg-slate-800  text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -33,7 +33,7 @@ const FavoriteList = () => {
                   <td className="px-6 py-4">{item.name}</td>
                   <td className="px-6 py-4">{item.username}</td>
                   <td className="px-6 py-4">{item.email}</td>
-                  <td className="px-6 py-4">{item.address.city}</td>
+                  <td className="px-6 py-4">{item.phone}</td>
                 </tr>
               );
             })}

@@ -1,17 +1,14 @@
-
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye , faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import { faEye, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import FavoriteIcon from "./FavoritesIcon";
 
 const Books = () => {
- 
   const books = useSelector((state) => state.book.books);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
- 
       <table className="w-full dark:bg-slate-800 dark:text-gray-400 text-sm text-left text-gray-600 ">
         <thead className="text-xs text-orange-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -30,7 +27,7 @@ const Books = () => {
             <th scope="col" className="px-6 py-3">
               Actions
             </th>
-  
+
             <th scope="col" className="px-6 py-3">
               favorites
             </th>
@@ -54,14 +51,15 @@ const Books = () => {
                         className="inline-block px-6 py-2 border-2 border-orange-600 text-orange-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                         icon={faEye}
                       />
-                    </Link> &nbsp; &nbsp;
-                    <Link  to={`/details/${item.id}`}  state ="edit">
+                    </Link>{" "}
+                    &nbsp; &nbsp;
+                    <Link to={`/details/${item.id}`} state="edit">
                       <FontAwesomeIcon
                         className="inline-block px-6 py-2 border-2 border-orange-600 text-orange-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                         icon={faPenToSquare}
                       />
                     </Link>
-                    </td>
+                  </td>
                   <td className="px-6 py-4">
                     <FavoriteIcon item={item} />
                   </td>

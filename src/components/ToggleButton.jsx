@@ -1,9 +1,8 @@
-
-import useDarkMode from './useDarkMode';
+import useDarkMode from "./useDarkMode";
 
 const ToggleButton = () => {
   const [colorTheme, setTheme] = useDarkMode();
- 
+
   return (
     <>
       <div className="mb-3">
@@ -15,7 +14,7 @@ const ToggleButton = () => {
               id="toggle"
               className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
               onClick={() => {
-                setTheme(colorTheme)
+                setTheme(colorTheme);
               }}
             />
             <label
