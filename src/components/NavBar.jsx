@@ -41,22 +41,25 @@ const NavBar = () => {
         <section>
           {admin && (
             <ul className="md:space-x-8 space-x-6 text-gray-900 font-semibold hidden md:flex">
-              <li className="relative group">
-                <NavLink to="/books">
-                  <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                    <FontAwesomeIcon icon={faList} />
-                  </div>
-                  <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-                </NavLink>
-              </li>
-              <li className="relative group">
-                <NavLink to="/card">
-                  <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                    <FontAwesomeIcon icon={faGrip} />
-                  </div>
-                  <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-                </NavLink>
-              </li>
+              {view === "books" ? (
+                <li className="relative group">
+                  <NavLink to="/books">
+                    <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                      <FontAwesomeIcon icon={faList} />
+                    </div>
+                    <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                  </NavLink>
+                </li>
+              ) : (
+                <li className="relative group">
+                  <NavLink to="/card">
+                    <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                      <FontAwesomeIcon icon={faGrip} />
+                    </div>
+                    <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                  </NavLink>
+                </li>
+              )}
               <li className="relative group">
                 <NavLink to="/favorites">
                   <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
