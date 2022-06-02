@@ -10,12 +10,12 @@ import Login from "../components/Login";
 import NotFound from "../components/Notfound";
 import Books from "../components/Books";
 import NavBar from "../components/NavBar";
-import FavoriteList from "../components/FavoriteList";
 import axios from "axios";
 import { useEffect } from "react";
 import { setBooks } from "../redux/features/bookSlices";
 import { useDispatch } from "react-redux";
 import Card from "../components/cards";
+import Register from "../components/Register";
 
 const Routers = () => {
   const dispatch = useDispatch();
@@ -27,18 +27,17 @@ const Routers = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
+  
   const admin = JSON.parse(localStorage.getItem("loginUser"));
-  console.log(admin);
-
+ 
   return (
     <Router>
       <NavBar />
       <Routes>
         <Route path="/" element={<Navigate replace to="/books" />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/books" element={<Books />} />
-        <Route path="/favorites" element={<FavoriteList />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/card" element={<Card />} />
         <Route path="*" element={<NotFound />} />

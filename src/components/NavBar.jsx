@@ -3,12 +3,18 @@ import { faGrip, faList } from "@fortawesome/free-solid-svg-icons";
 import ToggleButton from "./ToggleButton";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { showFav } from "../redux/features/helperSlice";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const [view, setView] = useState("");
+
+  const isShowFav = useSelector((state) => state.helper.showFav)
 
   const admin = JSON.parse(localStorage.getItem("loginUser"));
   const initialView = location.pathname.split("/")[1];
@@ -20,7 +26,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
 
   const handleBack = () => {
@@ -61,12 +67,11 @@ const NavBar = () => {
                 </li>
               )}
               <li className="relative group">
-                <NavLink to="/favorites">
-                  <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                    <span className="px-1.5"> Favorites</span>
-                  </div>
-                  <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-                </NavLink>
+                <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
+                 onClick={() => dispatch(showFav())}>
+                   <span className="px-1.5"> {isShowFav ?  "Books"  : "Favorites"}</span>
+                </div>
+                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
               </li>
               <li className="relative group" onClick={handleLogout}>
                 <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
