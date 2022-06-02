@@ -6,6 +6,7 @@ import FavoriteIcon from "./FavoritesIcon";
 
 const Books = () => {
   const books = useSelector((state) => state.book.books);
+  const favBooks = useSelector((state) => state.book.favBooks);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -27,14 +28,13 @@ const Books = () => {
             <th scope="col" className="px-6 py-3">
               Actions
             </th>
-
             <th scope="col" className="px-6 py-3">
               favorites
             </th>
           </tr>
         </thead>
         <tbody>
-          {books.length > 0 &&
+          {books?.length > 0 &&
             books.map((item) => {
               return (
                 <tr

@@ -4,6 +4,18 @@ import { useDispatch } from "react-redux";
 import { addUser, userAdmin } from "../redux/features/userSlices";
 
 const LoginForm = () => {
+
+  useEffect(() => {
+    const user = getCookie("myEmail");
+    const password = getCookie("myPassword");
+    setInputValues({
+      email: user,
+      password: password,
+    });
+    document.cookie = "myEmail=; MaxAge=0; secure ;path=http://localhost:3000";
+    document.cookie =
+      "myPassword=; MaxAge=0; secure ; path=http://localhost:3000";
+  }, []);
   const initialValues = {
     email: "",
     password: "",
@@ -67,18 +79,6 @@ const LoginForm = () => {
     setErrors(errors);
     return isValid;
   };
-
-  useEffect(() => {
-    const user = getCookie("myEmail");
-    const pswd = getCookie("myPassword");
-    setInputValues({
-      email: user,
-      password: pswd,
-    });
-    document.cookie = "myEmail=; MaxAge=0; secure ;path=http://localhost:3000";
-    document.cookie =
-      "myPassword=; MaxAge=0; secure ; path=http://localhost:3000";
-  }, []);
 
   const getCookie = (key) => {
     const name = key + "=";
@@ -154,8 +154,6 @@ const LoginForm = () => {
         {errors.password && (
           <div className="text-red-600 mb-5">{errors.password}</div>
         )}
-        <input type="checkbox" name="admin" id="admin" onClick={handleAdmin} />{" "}
-        Admin &nbsp;
         <input
           type="checkbox"
           name="remember me"

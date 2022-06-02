@@ -1,35 +1,29 @@
+import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { addFav, removeFav } from "../redux/features/bookSlices";
+import Tippy from '@tippyjs/react';
 
 const FavoriteIcon = ({ item }) => {
   const dispatch = useDispatch();
 
-  const addFavOne = () => {
-    dispatch(addFav({ ...item, isFav: true }));
-  };
-
-  const removeFavOne = () => {
-    dispatch(removeFav({ ...item }));
+  const handleClick = () => {
+    item.isFav
+      ? dispatch(removeFav({ ...item }))
+      : dispatch(addFav({ ...item, isFav: true }));
   };
 
   return (
-    <>
-      {item.isFav ? (
-        <FontAwesomeIcon
-          icon={faStar}
-          onClick={removeFavOne}
-          style={{ color: "orange" }}
-        />
-      ) : (
-        <FontAwesomeIcon
-          icon={faStar}
-          onClick={addFavOne}
-          style={{ color: "grey" }}
-        />
-      )}
-    </>
+   <Tippy content="Add to favorite">
+      <span>
+      <FontAwesomeIcon className="cursor-pointer "
+       icon={faStar}
+       onClick={handleClick}
+       style={{ color: `${item.isFav ? "orange" : "grey"}` }}
+     />
+      </span>
+   </Tippy>
   );
 };
 

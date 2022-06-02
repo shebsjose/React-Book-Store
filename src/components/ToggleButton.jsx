@@ -1,26 +1,22 @@
 import useDarkMode from "./useDarkMode";
+import { useState } from 'react'
 
 const ToggleButton = () => {
   const [colorTheme, setTheme] = useDarkMode();
+  const [isDark, setIsDark] = useState(false);
 
+  const handleToggle = () => {
+    setIsDark(!isDark);
+    setTheme(colorTheme);
+  }
   return (
     <>
       <div className="mb-3">
         <div className="w-50 ml-0 mr-0 mx-auto text-center">
-          <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-            <input
-              type="checkbox"
-              name="toggle"
-              id="toggle"
-              className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-              onClick={() => {
-                setTheme(colorTheme);
-              }}
-            />
-            <label
-              htmlFor="toggle"
-              className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer toggle-checkbox:checked"
-            ></label>
+        <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+        <div className="mr-5 cursor-pointer " onClick={handleToggle}>
+        {isDark ? '🌞' : '🌒'}
+        </div>
           </div>
         </div>
       </div>

@@ -12,16 +12,14 @@ import Books from "../components/Books";
 import NavBar from "../components/NavBar";
 import FavoriteList from "../components/FavoriteList";
 import axios from "axios";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { setBooks } from "../redux/features/bookSlices";
 import { useDispatch } from "react-redux";
-import Users from "../components/User";
 import Card from "../components/cards";
 
 const Routers = () => {
-  
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     axios("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
@@ -32,24 +30,21 @@ const Routers = () => {
 
   const admin = JSON.parse(localStorage.getItem("loginUser"));
   console.log(admin);
-  
-    return (
-      <div>
-        <Router>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Navigate replace to="/login" />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/books" element={<Books  />} />
-            <Route path="/favorites" element={<FavoriteList />} />
-            <Route path="/details/:id" element={<Details />} />
-            <Route path="/card" element={<Card />} />
-            <Route path="*" element={<NotFound/>} />   
-          </Routes>
-        </Router>
-      </div>
-    );
-  };
-  
-  export default Routers;
+
+  return (
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/books" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/favorites" element={<FavoriteList />} />
+        <Route path="/details/:id" element={<Details />} />
+        <Route path="/card" element={<Card />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default Routers;

@@ -1,16 +1,15 @@
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 
-const Users = () => {
+const Admin = () => {
   const [loginUser, setLoginUser] = useState({});
 
-  const user = useSelector((state) => state.user.users);
-  const allUser = user.filter((a) => !a.isAdmin);
-
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("loginUser"));
-    setLoginUser(user);
+    const users = JSON.parse(localStorage.getItem("loginUser"));
+    setLoginUser(users);
   }, []);
+  const users = useSelector((state) => state.user.users);
+  const allUser = users.filter((a) => !a.isAdmin);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg dark:bg-slate-800 dark:text-gray-400">
@@ -48,4 +47,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Admin;
