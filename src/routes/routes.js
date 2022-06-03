@@ -16,25 +16,40 @@ import { setBooks } from "../redux/features/bookSlices";
 import { useDispatch } from "react-redux";
 import Card from "../components/cards";
 import Register from "../components/Register";
+import { useSelector } from "react-redux";
 
 const Routers = () => {
+  const Selector = useSelector(state=>state.book)
   const dispatch = useDispatch();
 
+  const handleApi = async() =>{
+    const favIds = []
+    Selector?.favBooks.forEach(item=>{
+      favIds.push(item.id)
+    })
+    const result = await axios("https://jsonplaceholder.typicode.com/users")
+    const updatedBooks = result.data.map(item=>{
+      return (favIds.includes(item.id)?{...item,isFav:true}:{...item,isFav:false})
+    })
+      dispatch(setBooks(updatedBooks));
+  }
+
   useEffect(() => {
-    axios("https://jsonplaceholder.typicode.com/users")
-      .then((res) => {
-        dispatch(setBooks(res.data));
-      })
-      .catch((error) => console.log(error));
+    handleApi()
   }, []);
-  
-  const admin = JSON.parse(localStorage.getItem("loginUser"));
- 
+
+  const isLoggedIn = JSON.parse(localStorage.getItem("loginUser"));
+
   return (
     <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/books" />} />
+        <Route
+          path="/"
+          element={
+            <Navigate replace to={`${isLoggedIn ? "/books" : "/login"}`} />
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/books" element={<Books />} />

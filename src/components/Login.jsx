@@ -1,9 +1,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addUser, userAdmin } from "../redux/features/userSlices";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/features/userSlices";
 
 const LoginForm = () => {
+  const logged = useSelector((state) => state.user.isLoggedIn);
+
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const [inputValues, setInputValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    logged ? navigate("/books") : navigate("/login");
+  }, [logged]);
 
   useEffect(() => {
     const user = getCookie("myEmail");
@@ -16,17 +32,6 @@ const LoginForm = () => {
     document.cookie =
       "myPassword=; MaxAge=0; secure ; path=http://localhost:3000";
   }, []);
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-
-  const [inputValues, setInputValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
-  const [admin, setAdmin] = useState(false);
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
@@ -35,18 +40,9 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      if (admin) {
-        dispatch(userAdmin(inputValues));
-        navigate("/users");
-      } else {
-        dispatch(addUser(inputValues));
-        navigate("/books");
-      }
-      localStorage.setItem(
-        "loginUser",
-        JSON.stringify({ ...inputValues, admin })
-      );
-      setInputValues({});
+      dispatch(loginUser(inputValues));
+      localStorage.setItem("loginUser", JSON.stringify({ ...inputValues }));
+    } else {
     }
   };
   const validate = () => {
@@ -56,7 +52,7 @@ const LoginForm = () => {
 
     if (input.email === "") {
       isValid = false;
-      errors.email = "Please enter your Email Address.";
+      errors.email = "Please enter your email address.";
     } else {
       const emailPattern = new RegExp(
         /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
@@ -93,21 +89,12 @@ const LoginForm = () => {
       }
     }
   };
+
   const remember = () => {
     document.cookie =
       "myEmail=" + inputValues.email + "; path=http://localhost:3000";
     document.cookie =
       "myPassword=" + inputValues.password + "; path=http://localhost:3000";
-  };
-
-  const handleAdmin = (e) => {
-    const admin = e.target.checked;
-    if (admin) {
-      setAdmin(true);
-    } else {
-      setAdmin(false);
-    }
-    console.log(admin);
   };
 
   return (
@@ -132,24 +119,6 @@ const LoginForm = () => {
             value={inputValues.password}
             onChange={handleChange}
           />
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="17.607"
-            height="17.076"
-            viewBox="0 0 17.607 17.076"
-          >
-            <path
-              id="eye-off"
-              d="M12.392,16.769a8.718,8.718,0,0,1-9.935-5.938A8.675,8.675,0,0,1,3.817,8.2m5.1.79a2.611,2.611,0,1,1,3.692,3.692M8.914,8.985,12.6,12.675M8.916,8.986,6.053,6.124m6.554,6.554,2.863,2.863M2.929,3,6.053,6.124m0,0a8.7,8.7,0,0,1,13.011,4.707,8.723,8.723,0,0,1-3.6,4.708m0,0,3.123,3.123"
-              transform="translate(-1.957 -2.293)"
-              fill="none"
-              stroke="#949090"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1"
-            />
-          </svg>
         </div>
         {errors.password && (
           <div className="text-red-600 mb-5">{errors.password}</div>

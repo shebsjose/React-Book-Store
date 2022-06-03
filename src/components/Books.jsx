@@ -1,7 +1,3 @@
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import FavoriteIcon from "./FavoritesIcon";
 import BooksTable from "./BooksTable";
 import { useSelector } from "react-redux";
 

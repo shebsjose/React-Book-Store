@@ -1,7 +1,7 @@
 import Books from "../components/Books";
 
 const BooksPage = () => {
-  return <Books/>;
+  return <Books />;
 };
 
 export default BooksPage;

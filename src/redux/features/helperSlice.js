@@ -2,19 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const helperSlice = createSlice({
   name: "helper",
-  initialState: { 
-      showFav : false 
-    },
+  initialState: {
+    showFav: false,
+  },
   reducers: {
-   showFav : (state, action) => {
+    showFav: (state, action) => {
       state.showFav = !state.showFav;
-   },
-
-
-
-   
-    
-   
+    },
   },
 });
 

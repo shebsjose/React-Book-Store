@@ -41,38 +41,50 @@ const Details = () => {
     dispatch(updateBook(details));
     navigate("/books");
   };
-  
+
   return (
     <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm  dark:bg-slate-800 dark:text-gray-400">
-       <h2 className="text-orange-800 text-3xl font-semibold">
-            Details Page
-          </h2>
+      <h2 className="text-orange-800 text-3xl font-semibold">
+        {result === "edit" ? " Edit User Details" : "User Details"}
+      </h2>
       <div className="max-w-md py-4 px-8 bg-white border-2  border-orange-400 shadow-md border-shadow-5 shadow-lg rounded-lg my-20 dark:bg-slate-800 dark:text-gray-400">
         <div>
-          <label>Name</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            First Name
+          </label>
           <input
-            className="mt-2 text-orange-600 text-xl font-medium text-color-500 dark:bg-slate-800 dark:text-gray-400"
+            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
             value={details?.name}
             name="name"
             onChange={handleChange}
             disabled={result === "view"}
           />
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Last Name
+          </label>
           <input
-            className="mt-2 text-gray-600 dark:bg-slate-800 dark:text-gray-400"
+            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
             value={details?.username}
             name="username"
             onChange={handleChange}
             disabled={result === "view"}
           />
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Email
+          </label>
           <input
-            className="mt-2 text-gray-600 dark:bg-slate-800 dark:text-gray-400"
+            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
             value={details?.email}
             name="email"
             onChange={handleChange}
             disabled={result === "view"}
           />
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            {" "}
+            Phone
+          </label>
           <input
-            className="mt-2 text-gray-600 dark:bg-slate-800 dark:text-gray-400"
+            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
             value={details?.phone}
             name="phone"
             onChange={handleChange}

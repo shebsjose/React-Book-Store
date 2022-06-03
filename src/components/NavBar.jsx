@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { showFav } from "../redux/features/helperSlice";
 import { useSelector } from "react-redux";
+import { logoutUser } from "../redux/features/userSlices";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const NavBar = () => {
 
   const [view, setView] = useState("");
 
-  const isShowFav = useSelector((state) => state.helper.showFav)
+  const isShowFav = useSelector((state) => state.helper.showFav);
 
   const admin = JSON.parse(localStorage.getItem("loginUser"));
   const initialView = location.pathname.split("/")[1];
@@ -26,6 +27,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
+    dispatch(logoutUser());
     navigate("/login");
   };
 
@@ -67,15 +69,22 @@ const NavBar = () => {
                 </li>
               )}
               <li className="relative group">
-                <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
-                 onClick={() => dispatch(showFav())}>
-                   <span className="px-1.5"> {isShowFav ?  "Books"  : "Favorites"}</span>
-                </div>
-                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                <NavLink to="/books">
+                  <div
+                    className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
+                    onClick={() => dispatch(showFav())}
+                  >
+                    <span className="px-1.5">
+                      {" "}
+                      {isShowFav ? "Books" : "Favorites"}
+                    </span>
+                  </div>
+                  <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                </NavLink>
               </li>
               <li className="relative group" onClick={handleLogout}>
                 <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                  <span className="px-1.5"> LogOut</span>
+                  <span className="px-1.5"> Logout</span>
                 </div>
                 <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
               </li>
