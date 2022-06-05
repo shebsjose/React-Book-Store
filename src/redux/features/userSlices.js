@@ -14,7 +14,7 @@ export const userSlice = createSlice({
           user.password === action.payload.password
       );
       if (user) alert("Already Exits");
-      state.users = [...state.users, { ...action.payload, isAdmin: true }];
+      state.users = [...state.users, { ...action.payload, isAdmin: false }];
     },
 
     removeUser: (state, action) => {
@@ -36,10 +36,9 @@ export const userSlice = createSlice({
       }
       state.users = [...state.users];
     },
-
     logoutUser: (state) => {
       state.isLoggedIn = false;
-    },
+    }
   },
 });
 

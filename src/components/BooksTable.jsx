@@ -2,11 +2,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import FavoriteIcon from "./FavoritesIcon";
-import { useSelector } from "react-redux";
 
 const BooksTable = ({ data, showFav }) => {
-const selector = useSelector(state => state.book)
-console.log(selector);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full dark:bg-slate-800 dark:text-gray-400 text-sm text-left text-gray-600 ">
@@ -40,7 +37,7 @@ console.log(selector);
               return (
                 <tr
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  key={item.id}
+                  key={`${showFav ? `${item.phone}` : `${item.id}`}`}
                 >
                   <td className="px-6 py-4">{item.name}</td>
                   <td className="px-6 py-4">{item.username}</td>

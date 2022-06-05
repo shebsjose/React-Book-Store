@@ -18,7 +18,7 @@ const FavoriteIcon = ({ item }) => {
   };
 
   return (
-    <Tippy content={`${showFav ? "Remove from favorite" : "Add to favorite"}`}>
+    <Tippy content={`${item.isFav ? "Remove from favorite" : "Add to favorite"}`}>
       <span>
         <FontAwesomeIcon
           className="cursor-pointer "

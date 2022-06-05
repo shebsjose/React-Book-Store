@@ -1,32 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrip, faList } from "@fortawesome/free-solid-svg-icons";
 import ToggleButton from "./ToggleButton";
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { showFav } from "../redux/features/helperSlice";
+import { showFav, showGridView } from "../redux/features/helperSlice";
 import { useSelector } from "react-redux";
 import { logoutUser } from "../redux/features/userSlices";
 
 const NavBar = () => {
+
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
 
-  const [view, setView] = useState("");
-
-  const isShowFav = useSelector((state) => state.helper.showFav);
-
-  const admin = JSON.parse(localStorage.getItem("loginUser"));
-  const initialView = location.pathname.split("/")[1];
-
-  useEffect(() => {
-    if (initialView === "card") setView("books");
-    if (initialView === "books") setView("card");
-  }, [initialView, setView]);
+  const { showFav: isShowFav, isGridView } = useSelector((state) => state.helper);
+  const isLoggedIn = JSON.parse(localStorage.getItem("loginUser"));
+  console.log(isLoggedIn)
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("loginUser");
     dispatch(logoutUser());
     navigate("/login");
   };
@@ -47,32 +38,26 @@ const NavBar = () => {
           </label>
         </section>
         <section>
-          {admin && (
             <ul className="md:space-x-8 space-x-6 text-gray-900 font-semibold hidden md:flex">
-              {view === "books" ? (
-                <li className="relative group">
+               {isLoggedIn ? <><li className="relative group">
                   <NavLink to="/books">
-                    <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                      <FontAwesomeIcon icon={faList} />
+                    <div onClick={() => {
+                      isShowFav && dispatch(showFav())
+                      dispatch(showGridView());
+                    }} className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                      <FontAwesomeIcon icon={isGridView ? faList : faGrip} /> {isGridView ? "List" :  "Grid" }
                     </div>
                     <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
                   </NavLink>
                 </li>
-              ) : (
-                <li className="relative group">
-                  <NavLink to="/card">
-                    <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                      <FontAwesomeIcon icon={faGrip} />
-                    </div>
-                    <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-                  </NavLink>
-                </li>
-              )}
               <li className="relative group">
                 <NavLink to="/books">
                   <div
                     className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
-                    onClick={() => dispatch(showFav())}
+                    onClick={() => { 
+                      if(isGridView) dispatch(showGridView())
+                      dispatch(showFav());
+                    }}
                   >
                     <span className="px-1.5">
                       {" "}
@@ -88,12 +73,29 @@ const NavBar = () => {
                 </div>
                 <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
               </li>
+              </> : <>
+              <li className="relative group">
+                <NavLink to="/register">  
+                <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                  <span className="px-1.5"> Register</span>
+                </div>
+                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                </NavLink> 
+              </li>
+              <li>
+                <NavLink to="/login">  
+                <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                  <span className="px-1.5"> Login </span>
+                </div>
+                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                </NavLink>
+                </li>
+              </>}
               <li className="relative group">
                 <ToggleButton />
                 <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
               </li>
             </ul>
-          )}
         </section>
       </div>
     </nav>

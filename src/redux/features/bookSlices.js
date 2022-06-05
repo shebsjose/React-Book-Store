@@ -8,13 +8,6 @@ export const bookSlice = createSlice({
   },
   reducers: {
     setBooks: (state, action) => {
-      const favId = state.favBooks.map((fb)=>fb.id)
-      const favB = state.books.map((b) => {
-        if(favId.includes(b.id)) {
-          console.log("fav");
-        }
-      });
-      console.log(favB)
       state.books = action.payload;
     },
     updateBook: (state, action) => {
