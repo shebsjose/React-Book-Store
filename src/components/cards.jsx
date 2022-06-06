@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import FavoriteIcon from "./FavoritesIcon";
 
-
 const Card = () => {
   const books = useSelector((state) => state.book.books);
 
@@ -21,7 +20,7 @@ const Card = () => {
                       {item.name}
                     </span>
                     <span className="ml-5">
-                  <FavoriteIcon item = {item}/>
+                      <FavoriteIcon item={item} />
                     </span>
                     <h3 className="font-semibold text-l leading-6 text-gray-700 my-2">
                       {item.username}

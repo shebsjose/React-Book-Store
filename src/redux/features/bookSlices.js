@@ -8,7 +8,15 @@ export const bookSlice = createSlice({
   },
   reducers: {
     setBooks: (state, action) => {
-      state.books = action.payload;
+      const books = action.payload;
+      const favIds = [];
+      state.favBooks.forEach((item) => favIds.push(item.id));
+      const updatedBooks = books.map((item) => {
+        return favIds.includes(item.id)
+          ? { ...item, isFav: true }
+          : { ...item, isFav: false };
+      });
+      state.books = updatedBooks;
     },
     updateBook: (state, action) => {
       const updated = {

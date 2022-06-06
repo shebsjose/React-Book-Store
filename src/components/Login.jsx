@@ -6,20 +6,18 @@ import { loginUser } from "../redux/features/userSlices";
 const LoginForm = () => {
   const logged = useSelector((state) => state.user.isLoggedIn);
 
-  const initialValues = {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
-  };
-
-  const [inputValues, setInputValues] = useState(initialValues);
+  });
   const [errors, setErrors] = useState({});
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     logged ? navigate("/books") : navigate("/login");
-  }, [logged]);
+  }, [logged, navigate]);
 
   useEffect(() => {
     const user = getCookie("myEmail");
@@ -42,7 +40,6 @@ const LoginForm = () => {
     if (validate()) {
       dispatch(loginUser(inputValues));
       localStorage.setItem("loginUser", JSON.stringify({ ...inputValues }));
-    } else {
     }
   };
   const validate = () => {

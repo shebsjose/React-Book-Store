@@ -3,15 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/features/userSlices";
 
-
 const Register = () => {
-  
   const initialValues = {
     name: "",
     email: "",
     password: "",
   };
-  
+
   const [inputValues, setInputValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
 

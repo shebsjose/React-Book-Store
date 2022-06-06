@@ -7,17 +7,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Details = () => {
+  
   const dispatch = useDispatch();
-  useEffect(() => {
-    setDetails({
-      id: userDetails.id,
-      name: userDetails.name,
-      username: userDetails.username,
-      email: userDetails.email,
-      phone: userDetails.phone,
-    });
-  }, []);
-
   const navigate = useNavigate();
   const location = useLocation();
   const result = location.state;
@@ -32,6 +23,16 @@ const Details = () => {
     email: "",
     phone: "",
   });
+
+  useEffect(() => {
+    setDetails({
+      id: userDetails.id,
+      name: userDetails.name,
+      username: userDetails.username,
+      email: userDetails.email,
+      phone: userDetails.phone,
+    });
+  }, []);
 
   const handleChange = (e) => {
     setDetails({ ...details, [e.target.name]: e.target.value });

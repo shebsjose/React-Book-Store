@@ -22,7 +22,7 @@ const persistConfig = {
 const reducers = combineReducers({
   book: bookReducer,
   user: userReducer,
-  helper: helperReducer
+  helper: helperReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

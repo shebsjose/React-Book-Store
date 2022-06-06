@@ -8,13 +8,16 @@ import { useSelector } from "react-redux";
 import { logoutUser } from "../redux/features/userSlices";
 
 const NavBar = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { showFav: isShowFav, isGridView } = useSelector((state) => state.helper);
-  const isLoggedIn = JSON.parse(localStorage.getItem("loginUser"));
-  console.log(isLoggedIn)
+  const { showFav: isShowFav, isGridView } = useSelector(
+    (state) => state.helper
+  );
+  const { isLoggedIn, loginUser } = useSelector((state) => state.user);
+
+  // const isLoggedIn = getInLocalStorage();
+  // console.log(isLoggedIn)
 
   const handleLogout = () => {
     localStorage.removeItem("loginUser");
@@ -38,64 +41,83 @@ const NavBar = () => {
           </label>
         </section>
         <section>
-            <ul className="md:space-x-8 space-x-6 text-gray-900 font-semibold hidden md:flex">
-               {isLoggedIn ? <><li className="relative group">
+          <ul className="md:space-x-8 space-x-6 text-gray-900 font-semibold hidden md:flex">
+            {isLoggedIn ? (
+              <>
+                {loginUser.isAdmin && (
+                  <li className="relative group">
+                    <NavLink to="/users">
+                      <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                        <span className="px-1.5"> Users</span>
+                      </div>
+                      <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                    </NavLink>
+                  </li>
+                )}
+                <li className="relative group">
                   <NavLink to="/books">
-                    <div onClick={() => {
-                      isShowFav && dispatch(showFav())
-                      dispatch(showGridView());
-                    }} className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                      <FontAwesomeIcon icon={isGridView ? faList : faGrip} /> {isGridView ? "List" :  "Grid" }
+                    <div
+                      onClick={() => {
+                        isShowFav && dispatch(showFav());
+                        dispatch(showGridView());
+                      }}
+                      className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
+                    >
+                      <FontAwesomeIcon icon={isGridView ? faList : faGrip} />{" "}
+                      {isGridView ? "List" : "Grid"}
                     </div>
                     <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
                   </NavLink>
                 </li>
-              <li className="relative group">
-                <NavLink to="/books">
-                  <div
-                    className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
-                    onClick={() => { 
-                      if(isGridView) dispatch(showGridView())
-                      dispatch(showFav());
-                    }}
-                  >
-                    <span className="px-1.5">
-                      {" "}
-                      {isShowFav ? "Books" : "Favorites"}
-                    </span>
+                <li className="relative group">
+                  <NavLink to="/books">
+                    <div
+                      className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
+                      onClick={() => {
+                        if (isGridView) dispatch(showGridView());
+                        dispatch(showFav());
+                      }}
+                    >
+                      <span className="px-1.5">
+                        {" "}
+                        {isShowFav ? "Books" : "Favorites"}
+                      </span>
+                    </div>
+                    <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                  </NavLink>
+                </li>
+                <li className="relative group" onClick={handleLogout}>
+                  <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                    <span className="px-1.5"> Logout</span>
                   </div>
                   <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-                </NavLink>
-              </li>
-              <li className="relative group" onClick={handleLogout}>
-                <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                  <span className="px-1.5"> Logout</span>
-                </div>
-                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-              </li>
-              </> : <>
-              <li className="relative group">
-                <NavLink to="/register">  
-                <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                  <span className="px-1.5"> Register</span>
-                </div>
-                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-                </NavLink> 
-              </li>
-              <li>
-                <NavLink to="/login">  
-                <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
-                  <span className="px-1.5"> Login </span>
-                </div>
-                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-                </NavLink>
                 </li>
-              </>}
-              <li className="relative group">
-                <ToggleButton />
-                <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
-              </li>
-            </ul>
+              </>
+            ) : (
+              <>
+                <li className="relative group">
+                  <NavLink to="/register">
+                    <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                      <span className="px-1.5"> Register</span>
+                    </div>
+                    <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/login">
+                    <div className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer">
+                      <span className="px-1.5"> Login </span>
+                    </div>
+                    <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+                  </NavLink>
+                </li>
+              </>
+            )}
+            <li className="relative group">
+              <ToggleButton />
+              <div className="w-full  bg-transparent group-hover:bg-purple-500 transition-al absolute bottom-0" />
+            </li>
+          </ul>
         </section>
       </div>
     </nav>

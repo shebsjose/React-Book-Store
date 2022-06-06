@@ -11,41 +11,23 @@ import NotFound from "../components/Notfound";
 import Books from "../components/Books";
 import NavBar from "../components/NavBar";
 import Register from "../components/Register";
-
+import Auth from "../utils/Auth.js";
+import { useSelector } from "react-redux";
+import Users from "../components/Users";
 
 const Routers = () => {
-
-  const isLoggedIn = JSON.parse(localStorage.getItem("loginUser"));
-  console.log(isLoggedIn)
-
+  const { isLoggedIn } = useSelector((state) => state.user);
   return (
     <Router>
       <NavBar />
       <Routes>
-        {isLoggedIn ? <>
-          <Route
-            path="/"
-            replace
-            element={
-              <Navigate to="/books" />
-            }
-          />
-          <Route path="/books" element={<Books />} />
-          <Route path="/details/:id" element={<Details />} />
-        </> : 
-        <>
-         <Route
-            path="/"
-            replace
-            element={
-              <Navigate to="/login" />
-            }
-          />
-          <Route path="/login" element={<Login />} />
-        </>
-        }
+        <Route path="/" element={<Navigate to={isLoggedIn ? "/books" : "/login"}/>} />
+        <Route path="/books" element={<Auth><Books/></Auth>} />
+        <Route path="/details/:id" element={<Auth><Details /></Auth>} />
+        <Route path="/users" element={<Auth><Users/></Auth>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

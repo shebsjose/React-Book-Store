@@ -1,19 +1,11 @@
 import { useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
 
-const Admin = () => {
-  const [loginUser, setLoginUser] = useState({});
-
-  useEffect(() => {
-    const users = JSON.parse(localStorage.getItem("loginUser"));
-    setLoginUser(users);
-  }, []);
-  const users = useSelector((state) => state.user.users);
-  const allUser = users.filter((a) => !a.isAdmin);
+const Users = () => {
+  const { loginUser, users } = useSelector((state) => state.user);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg dark:bg-slate-800 dark:text-gray-400">
-      {loginUser?.admin ? (
+      {loginUser.isAdmin ? (
         <table className="w-full dark:bg-slate-800  text-sm text-left text-gray-600 dark:text-gray-400">
           <thead className="text-xs text-orange-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -26,8 +18,8 @@ const Admin = () => {
             </tr>
           </thead>
           <tbody>
-            {allUser.length > 0 &&
-              allUser.map((item, key) => {
+            {users.length > 0 &&
+              users.map((item, key) => {
                 return (
                   <tr
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -47,4 +39,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Users;

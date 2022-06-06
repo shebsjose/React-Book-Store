@@ -4,7 +4,7 @@ export const helperSlice = createSlice({
   name: "helper",
   initialState: {
     showFav: false,
-    isGridView: false
+    isGridView: false,
   },
   reducers: {
     showFav: (state, action) => {
@@ -12,7 +12,7 @@ export const helperSlice = createSlice({
     },
     showGridView: (state, action) => {
       state.isGridView = !state.isGridView;
-    }
+    },
   },
 });
 
