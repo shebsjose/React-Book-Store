@@ -5,7 +5,7 @@ const Users = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg dark:bg-slate-800 dark:text-gray-400">
-      {loginUser.isAdmin ? (
+      {loginUser.isAdmin && (
         <table className="w-full dark:bg-slate-800  text-sm text-left text-gray-600 dark:text-gray-400">
           <thead className="text-xs text-orange-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -32,12 +32,6 @@ const Users = () => {
               })}
           </tbody>
         </table>
-      ) : (
-        <div >
-        <h3>
-          <span className= "flex text-center justify-center text-gray-400 font-medium text-sm md:text-xl lg:text-2xl mt-8"> There in no Favorite List.</span>
-          </h3>
-        </div>
       )}
     </div>
   );
