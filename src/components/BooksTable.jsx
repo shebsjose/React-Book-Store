@@ -32,7 +32,7 @@ const BooksTable = ({ data, showFav }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.length > 0 &&
+          {data?.length > 0 ?
             data.map((item) => {
               return (
                 <tr
@@ -65,7 +65,11 @@ const BooksTable = ({ data, showFav }) => {
                   </td>
                 </tr>
               );
-            })}
+            }) : <div >
+              <h3>
+                <span className= "flex items-center justify-center text-gray-400 font-medium text-sm md:text-xl lg:text-2xl mt-8"> There in no Favorite List.</span>
+                </h3>
+              </div>}
         </tbody>
       </table>
     </div>
