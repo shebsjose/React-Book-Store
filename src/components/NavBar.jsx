@@ -58,8 +58,8 @@ const NavBar = () => {
                   <NavLink to="/books">
                     <div
                       onClick={() => {
-                        isShowFav && dispatch(showFav());
-                        dispatch(showGridView());
+                        //  isShowFav && dispatch(showFav());
+                         dispatch(showGridView());
                       }}
                       className="bg-orange-500 px-4 py-1 rounded-xl text-white hover:bg-orange-400 active:bg-orange-600 focus:ring focus:ring-orange-500 focus:ring-opacity-25 outline-none cursor-pointer"
                     >

@@ -20,10 +20,6 @@ export const userSlice = createSlice({
       state.users = [...state.users, { ...action.payload, isAdmin: false }];
     },
 
-    removeUser: (state, action) => {
-      state.users = state.users.filter((li) => li.id !== action.payload.id);
-    },
-
     loginUser: (state, action) => {
       const tempArr = current(state).users;
       const user = tempArr.find(
@@ -48,7 +44,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { addUser, removeUser, loginUser, setUserSuccess, logoutUser } =
+export const { addUser, loginUser, setUserSuccess, logoutUser } =
   userSlice.actions;
 
 export default userSlice.reducer;

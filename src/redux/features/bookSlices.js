@@ -18,6 +18,7 @@ export const bookSlice = createSlice({
       });
       state.books = updatedBooks;
     },
+    
     updateBook: (state, action) => {
       const updated = {
         ...action.payload,
