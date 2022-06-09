@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Details = () => {
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,7 +23,7 @@ const Details = () => {
     email: "",
     phone: "",
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({ });
 
   useEffect(() => {
     setDetails({
@@ -60,10 +61,10 @@ const Details = () => {
 
     if (input?.username === "") {
       isValid = false;
-      errors.name = "Please enter your last name";
-    } else if (input.name?.length > 8) {
+      errors.username = "Please enter your last name";
+    } else if (input.username?.length > 8) {
       isValid = false;
-      errors.name = "Name cannot exceed 8 characters";
+      errors.username = "Name cannot exceed 8 characters";
     }
 
     if (input.email === "") {
@@ -125,9 +126,7 @@ const Details = () => {
             onChange={handleChange}
             disabled={result === "view"}
           />
-          {errors.username && (
-            <div className="text-red-600">{errors.username}</div>
-          )}
+         {errors.username && <div className="text-red-600">{errors.username}</div>}
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Email
           </label>
