@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,7 +6,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Details = () => {
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,7 +21,7 @@ const Details = () => {
     email: "",
     phone: "",
   });
-  const [errors, setErrors] = useState({ });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setDetails({
@@ -72,7 +70,7 @@ const Details = () => {
       errors.email = "Please enter your email address.";
     } else {
       const emailPattern = new RegExp(
-        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
       );
 
       if (!emailPattern.test(input.email)) {
@@ -103,65 +101,89 @@ const Details = () => {
       <h2 className=" text-center text-orange-800 text-3xl font-semibold">
         {result === "edit" ? " Edit User Details" : "User Details"}
       </h2>
-      <div className="max-w-md py-4 px-8 bg-white border-2  border-orange-400 shadow-md border-shadow-5 shadow-lg rounded-lg my-8 dark:bg-slate-800 dark:text-gray-400">
-        <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            First Name
-          </label>
-          <input
-            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
-            value={details?.name}
-            name="name"
-            onChange={handleChange}
-            disabled={result === "view"}
-          />
-          {errors.name && <div className="text-red-600">{errors.name}</div>}
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Last Name
-          </label>
-          <input
-            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
-            value={details?.username}
-            name="username"
-            onChange={handleChange}
-            disabled={result === "view"}
-          />
-         {errors.username && <div className="text-red-600">{errors.username}</div>}
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Email
-          </label>
-          <input
-            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
-            value={details?.email}
-            name="email"
-            onChange={handleChange}
-            disabled={result === "view"}
-          />
-          {errors.email && <div className="text-red-600">{errors.email}</div>}
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            {" "}
-            Phone
-          </label>
-          <input
-            className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
-            value={details?.phone}
-            name="phone"
-            onChange={handleChange}
-            disabled={result === "view"}
-          />
-          {errors.phone && <div className="text-red-600">{errors.phone}</div>}
+      {result === "edit" ? (
+        <div className="max-w-md py-4 px-8 bg-white border-2  border-orange-400 shadow-md border-shadow-5 shadow-lg rounded-lg my-8 dark:bg-slate-800 dark:text-gray-400">
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              First Name
+            </label>
+            <input
+              className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
+              value={details?.name}
+              name="name"
+              onChange={handleChange}
+              disabled={result === "view"}
+            />
+            {errors.name && <div className="text-red-600">{errors.name}</div>}
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Last Name
+            </label>
+            <input
+              className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
+              value={details?.username}
+              name="username"
+              onChange={handleChange}
+              disabled={result === "view"}
+            />
+            {errors.username && (
+              <div className="text-red-600">{errors.username}</div>
+            )}
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Email
+            </label>
+            <input
+              className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
+              value={details?.email}
+              name="email"
+              onChange={handleChange}
+              disabled={result === "view"}
+            />
+            {errors.email && <div className="text-red-600">{errors.email}</div>}
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              {" "}
+              Phone
+            </label>
+            <input
+              className="w-full border rounded h-12 px-4 focus:outline-none dark:bg-slate-800 dark:text-gray-400"
+              value={details?.phone}
+              name="phone"
+              onChange={handleChange}
+              disabled={result === "view"}
+            />
+            {errors.phone && <div className="text-red-600">{errors.phone}</div>}
+          </div>
+          <br></br>
+          {result === "edit" && (
+            <button
+              className="text-white bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-500 focus:outline-none dark:focus:ring-orange-600"
+              type="button"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          )}
         </div>
-        <br></br>
-        {result === "edit" && (
-          <button
-            className="text-white bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-500 focus:outline-none dark:focus:ring-orange-600"
-            type="button"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        )}
-      </div>
+      ) : (
+        <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm">
+          <div className="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20">
+            <div className="flex justify-center md:justify-end -mt-16"></div>
+            <div>
+              <h1 className="mt-2 text-gray-600 text-xl font-medium ">
+                {details.name}
+              </h1>
+              <p className="mt-2 text-gray-600 text-xl font-medium ">
+                {details.username}
+              </p>
+              <p className="mt-2 text-gray-600 text-xl font-medium ">
+                {details.email}
+              </p>
+              <p className="mt-2 text-gray-600 text-xl font-medium">
+                {details.phone}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

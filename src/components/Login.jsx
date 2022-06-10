@@ -39,7 +39,6 @@ const LoginForm = () => {
     e.preventDefault();
     if (validate()) {
       dispatch(loginUser(inputValues));
-      localStorage.setItem("loginUser", JSON.stringify({ ...inputValues }));
     }
   };
   const validate = () => {
@@ -64,7 +63,7 @@ const LoginForm = () => {
       isValid = false;
       errors.password = "Please enter your password.";
     } else {
-      if (input.password.length <= 6) {
+      if (input.password.length > 6) {
         isValid = false;
         errors.password = "Please enter six length password.";
       }

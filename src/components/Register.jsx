@@ -58,7 +58,7 @@ const Register = () => {
       isValid = false;
       errors.password = "Please enter your password.";
     } else {
-      if (input.password.length <= 6) {
+      if (input.password.length > 6) {
         isValid = false;
         errors.password = "Please enter six length password.";
       }

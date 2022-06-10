@@ -65,11 +65,11 @@ const BooksTable = ({ data, showFav }) => {
                   </td>
                 </tr>
               );
-            }) : <div >
-              <h3>
+            }) : <tr >
+              <td>
                 <span className= "flex text-center justify-center text-gray-400 font-medium text-sm md:text-xl lg:text-2xl mt-8"> There in no Favorite List.</span>
-                </h3>
-              </div>}
+                </td>
+              </tr>}
         </tbody>
       </table>
     </div>
