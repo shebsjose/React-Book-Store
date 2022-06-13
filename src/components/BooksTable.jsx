@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import FavoriteIcon from "./FavoritesIcon";
+import ReactPaginate from 'react-paginate';
 
 const BooksTable = ({ data, showFav }) => {
+
+const handleChangeClick = (data) =>{
+  console.log(data.selected);
+}
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full dark:bg-slate-800 dark:text-gray-400 text-sm text-left text-gray-600 ">
@@ -72,6 +78,21 @@ const BooksTable = ({ data, showFav }) => {
               </tr>}
         </tbody>
       </table>
+      <ReactPaginate
+        previousLabel={"< previous"}
+        nextLabel={"next >"}
+        breakLabel={"..."}
+        pageCount={25}
+        marginPagesDisplayed={4}
+        pageRangeDisplayed={6}
+        onPageChange={handleChangeClick}
+        containerClassName={"inline-flex "}
+        pageClassName={"bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"}
+        pageLinkClassName={"relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+        previousClassName={"relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+        previousLinkClassName={"relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+       nextClassName={" relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+      />
     </div>
   );
 };
