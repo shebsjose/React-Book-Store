@@ -6,6 +6,7 @@ import ReactPaginate from 'react-paginate';
 
 const BooksTable = ({ data, showFav }) => {
 
+  
 const handleChangeClick = (data) =>{
   console.log(data.selected);
 }
@@ -39,7 +40,7 @@ const handleChangeClick = (data) =>{
         </thead>
         <tbody>
           {data?.length > 0 ?
-            data.map((item) => {
+            data.slice(0,4).map((item) => {
               return (
                 <tr
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -86,12 +87,16 @@ const handleChangeClick = (data) =>{
         marginPagesDisplayed={4}
         pageRangeDisplayed={6}
         onPageChange={handleChangeClick}
-        containerClassName={"inline-flex "}
+        containerClassName={"inline-flex justify-center"}
         pageClassName={"bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"}
-        pageLinkClassName={"relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
-        previousClassName={"relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
-        previousLinkClassName={"relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
-       nextClassName={" relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+        pageLinkClassName={" relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+        previousClassName={"relative inline-flex items-center text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ml-10"}
+        previousLinkClassName={"dark:hover:bg-blue-300 bg-blue-100 hover:bg-blue-200 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+        nextClassName={" relative inline-flex items-center text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+        nextLinkClassName={"dark:hover:bg-blue-300 bg-blue-100 hover:bg-blue-200 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"}
+        breakClassName={"relative inline-flex items-center text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ml-10"}
+        breakLinkClassName={"bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300"}
+        activeClassName={"gray-300 hover:bg-gray-400"}
       />
     </div>
   );
