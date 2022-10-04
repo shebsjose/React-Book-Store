@@ -18,15 +18,20 @@ export const bookSlice = createSlice({
       });
       state.books = updatedBooks;
     },
-    
+
     updateBook: (state, action) => {
       const updated = {
         ...action.payload,
+        isFav: true,
       };
-      const updateList = state.books.map((list) =>
+      const updatedFavBook = state.books.map((list) =>
         list.id === action.payload.id ? updated : list
       );
-      state.books = updateList;
+      state.books = updatedFavBook;
+      const updateList = state.favBooks.map((list) =>
+        list.id === action.payload.id ? updated : list
+      );
+      state.favBooks = updateList;
     },
 
     addFav: (state, action) => {
